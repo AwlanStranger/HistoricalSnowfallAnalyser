@@ -1,6 +1,6 @@
 # Snowfall Analysis Script
 
-This script retrieves historical snowfall data using the Open-Meteo API, processes it to determine the first day of significant snowfall for each winter season, calculates the distance from August 1st to that date, and visualizes the results in a chart.
+This script retrieves historical snowfall data using the Open-Meteo API, processes it to determine the first day of significant snowfall for each winter season, calculates the distance from a seasonal breakpoint to that date, and visualizes the results in a chart.
 
 ## Requirements
 
@@ -24,9 +24,9 @@ pip install openmeteo_requests requests_cache pandas retry_requests matplotlib s
 1. **Setup API Client**: The script sets up an Open-Meteo API client with caching and retry functionality.
 2. **API Call**: It retrieves daily snowfall data for a specified location and date range.
 3. **Data Processing**:
-   - It calculates the distance from the last August 1st for each significant snowfall day found.
+   - It calculates the distance from the seasonal breakpoint for each significant snowfall day found.
    - The script only considers snowfall amounts greater than a defined threshold (e.g., 10 cm).
-4. **Data Visualization**: The results are plotted as a line chart showing the distance from August 1st against the first day of snowfall for each season.
+4. **Data Visualization**: The results are plotted as a line chart showing the distance from the seasonal breakpoint against the first day of snowfall for each season.
 
 ## Usage
 
@@ -52,7 +52,7 @@ You can modify the following parameters in the script:
 
 ## Output
 
-The script generates a line chart showing the distance from August 1st to the first significant snowfall day for each winter season.
+The script generates a line chart showing the distance from the seasonal breakpoint to the first significant snowfall day for each winter season.
 
 ## Why does this matter?
 

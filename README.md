@@ -34,8 +34,14 @@ pip install openmeteo_requests requests_cache pandas retry_requests matplotlib s
 2. Ensure that you have all the required libraries installed.
 3. Run the script in your preferred Python environment.
 ```
-python snowfall_analysis.py
+python ./index.py
 ```
+Or
+
+```
+./index.py
+```
+
 ## Modifying Parameters
 
 You can modify the following parameters in the script:

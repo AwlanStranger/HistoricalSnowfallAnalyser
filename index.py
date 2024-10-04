@@ -3,6 +3,9 @@ import requests_cache
 import pandas as pd
 from retry_requests import retry
 from datetime import datetime
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import date
 
 # Setup the Open-Meteo API client with cache and retry on error
 cache_session = requests_cache.CachedSession('.cache', expire_after = -1)
@@ -37,21 +40,44 @@ daily_data = {"date": pd.date_range(
 )}
 daily_data["snowfall_sum"] = daily_snowfall_sum
 
-POW_BREAKPOINT = 3 # cm
+POW_BREAKPOINT = 10 # cm
 SEASON_START = 8 # August
 
-df = pd.DataFrame(data = daily_data)
-# print(df.iloc[0].date.month)
+dailyDf = pd.DataFrame(data = daily_data)
 
 firstSnowfallFound = False
-for index, row in df.iterrows():
-  if df.iloc[index].date.month == SEASON_START:
+results = []
+for index, row in dailyDf.iterrows():
+  if row.date.month == SEASON_START:
     firstSnowfallFound = False
   if firstSnowfallFound:
     continue
 
-  if df.iloc[index].snowfall_sum > POW_BREAKPOINT:
-    print("date          : " + str(df.iloc[index].date.date()))
-    print("snowfall (cm) : " + str(df.iloc[index].snowfall_sum))
-    print('-------------------------------------')
+  if row.snowfall_sum > POW_BREAKPOINT:
+    # find the distance from last august 1st to this day
+    yearOfLastAugust = row.date.year # what year is last august?
+    if row.date.month < 8: yearOfLastAugust = yearOfLastAugust - 1
+    lastAugust = date(yearOfLastAugust, 8, 1)
+    distanceFromLastAugust = (row.date.date() - lastAugust).days
+
+    # Collect the year, and distance from august in list of results
+    results.append([row.date.date(), distanceFromLastAugust])
+
     firstSnowfallFound = True
+    # print("date          : " + str(row.date.date()))
+    # print("snowfall (cm) : " + str(row.snowfall_sum))
+    # print('-------------------------------------')
+
+yearlyDf = pd.DataFrame(results, columns=['Season first day', 'Distance from August 1st'])
+# print(yearlyDf)
+
+plt.figure(figsize=(10, 6))
+plt.plot(yearlyDf['Season first day'], yearlyDf['Distance from August 1st'], marker='o', color='blue', linestyle='-', linewidth=2)
+plt.title('Distance from August 1st vs Season first day')
+plt.xlabel('Season First Days')
+plt.ylabel('Distance from August 1st (days)')
+plt.axhline(0, color='red', linestyle='--', label='August 1st')  # Add a horizontal line at y=0
+plt.grid()
+plt.xticks(yearlyDf['Season first day'].unique(), rotation=45)  # Set x-ticks to unique years
+plt.legend()
+plt.show()

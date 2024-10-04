@@ -54,6 +54,10 @@ You can modify the following parameters in the script:
 
 The script generates a line chart showing the distance from August 1st to the first significant snowfall day for each winter season.
 
+## Why does this matter?
+
+My first real desire to seek out climate knowledge was during the winter of 2023/2024, during the El Nino event. I had just gotten to the rank of "avid" snowboarder when suddenly there was barely any snowfall until January, and even then it was thin sheets of rock-hard ice. My surface level of geography knowledge enough to know what El Nino was but not enough to identify things like "What year is the best to buy a season pass ahead of time?" or "What is the probability opening day at my local hill is on a weekend?" or even "When should I take my PTO for the highest likelihood of aligning with a pow day?". And now we even have to normalize for things like forest fires and global warming affecting the climate. So I set out to make create some tools and study the climate better and make climate studies more accessible to people of all hobbies.
+
 ## Acknowledgments
 
 - Open-Meteo API for providing the weather data.

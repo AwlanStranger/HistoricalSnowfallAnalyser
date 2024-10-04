@@ -54,8 +54,6 @@ You can modify the following parameters in the script:
 
 The script generates a line chart showing the distance from August 1st to the first significant snowfall day for each winter season.
 
-### Example Output
-
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
